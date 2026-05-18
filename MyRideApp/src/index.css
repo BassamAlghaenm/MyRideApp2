@@ -1,0 +1,185 @@
+:root {
+  /* COLORS: Bright Cyan for high visibility on dark mode */
+  --primary: #0EA5E9; 
+  --primary-hover: #0284C7;
+  --danger: #EF4444;
+  --success: #10B981;
+  
+  /* DARK THEME VARIABLES */
+  --glass-bg: rgba(15, 23, 42, 0.85); /* Dark Blue/Black tint */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+  --text-main: #FFFFFF;
+  --text-muted: #CBD5E1; /* Light Gray */
+  --radius: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* THEMED BACKGROUND: City/Campus Road at Night */
+  background: 
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2670&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* LAYOUT STRUCTURE */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 20px;
+  max-width: 1400px; /* PC Width Limit */
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* NAVBAR */
+nav {
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav span {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #38BDF8; /* Bright Cyan Logo */
+  letter-spacing: 1px;
+}
+
+/* CARDS (The Dark Glass Box) */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: var(--glass-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  color: white;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+
+.card h2, .card h3 { margin-top: 0; color: white; }
+.card p { color: var(--text-muted); }
+
+/* INPUTS & SELECTS */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 20px;
+  background: rgba(0, 0, 0, 0.3); /* Dark transparent input */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Fix Dropdown Menu Options */
+select option {
+  background-color: #1e293b; /* Dark Slate background for dropdowns */
+  color: white;
+}
+
+/* BUTTONS */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+button:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* PC GRID LAYOUT */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 450px 1fr; /* Sidebar | Map */
+    align-items: start;
+  }
+  .map-container-wrapper {
+    height: 600px;
+    position: sticky;
+    top: 20px;
+  }
+}
+
+/* UTILITIES */
+.center-view {
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.fade-in { animation: fadeIn 0.5s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* STATUS BADGES */
+.status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+.status-pending { background: #F59E0B; color: black; }
+.status-accepted { background: #3B82F6; color: white; }
+.status-active { background: #EF4444; color: white; } /* "in_progress" alias */
+.status-in_progress { background: #EF4444; color: white; }
+.status-completed { background: #10B981; color: white; }
+.status-banned { background: #000; color: #EF4444; border: 1px solid #EF4444; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+
+/* SOS BUTTON STYLES */
+.sos-btn {
+  background: #EF4444; color: white; border-radius: 50%; width: 60px; height: 60px;
+  font-weight: 900; font-size: 1rem; border: 4px solid rgba(255,0,0,0.3);
+  position: fixed; bottom: 30px; right: 30px; z-index: 100;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: 0.3s;
+}
+.sos-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px red; }
+.sos-active { animation: shake 0.5s infinite; background: darkred; }
+@keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
